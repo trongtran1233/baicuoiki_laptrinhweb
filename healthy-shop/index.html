@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthyBites - Cửa Hàng Đồ Ăn Kiêng</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <h1 class="logo">🥗 HealthyBites</h1>
+            
+            <aside class="health-tip" id="healthTipContainer">
+                <span class="tip-label">💡 Mẹo Sức Khỏe:</span>
+                <p id="tipText">Đang tải mẹo...</p>
+            </aside>
+
+            <!-- KHU VỰC TÀI KHOẢN (ĐĂNG KÝ / ĐĂNG NHẬP / ĐĂNG XUẤT) -->
+            <div class="auth-buttons" id="authSection">
+                <!-- Hiển thị khi CHƯA đăng nhập -->
+                <div id="guestNav">
+                    <button class="btn btn-outline" onclick="openAuthModal('login')">Đăng Nhập</button>
+                    <button class="btn btn-primary" onclick="openAuthModal('register')">Đăng Ký</button>
+                </div>
+                <!-- Hiển thị khi ĐÃ đăng nhập -->
+                <div id="userNav" style="display: none;">
+                    <span id="userGreeting">Xin chào, <strong id="userName">User</strong></span>
+                    <button class="btn btn-danger-sm" onclick="logout()">Đăng Xuất</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container shop-layout">
+        <!-- CỘT TRÁI: Danh sách sản phẩm -->
+        <section class="products-section">
+            <div class="card filter-bar">
+                <input type="text" id="searchInput" placeholder="🔎 Tìm món ăn kiêng...">
+                <select id="categoryFilter">
+                    <option value="all">Tất cả danh mục</option>
+                    <option value="Keto">Keto</option>
+                    <option value="Eat Clean">Eat Clean</option>
+                    <option value="Vegan">Vegan (Chay)</option>
+                    <option value="Low-Carb">Low-Carb</option>
+                </select>
+            </div>
+
+            <h2>Thực Đơn Đồ Ăn Kiêng</h2>
+            <div id="productGrid" class="product-grid">
+                <!-- Sản phẩm render từ JS -->
+            </div>
+        </section>
+
+        <!-- CỘT PHẢI: Giỏ hàng -->
+        <section class="cart-section card">
+            <h2>🛒 Giỏ Hàng Của Bạn</h2>
+            <div id="cartItems" class="cart-items">
+                <p class="empty-cart">Giỏ hàng trống</p>
+            </div>
+            
+            <div class="cart-summary">
+                <div class="total-line">
+                    <span>Tổng tiền:</span>
+                    <strong id="cartTotal">0 đ</strong>
+                </div>
+                <button id="checkoutBtn" class="btn btn-primary btn-block" onclick="checkout()">Tiến Hành Đặt Hàng</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- POPUP MODAL ĐĂNG NHẬP / ĐĂNG KÝ -->
+    <div class="modal" id="authModal">
+        <div class="modal-content card">
+            <span class="close-btn" onclick="closeAuthModal()">&times;</span>
+            
+            <!-- Tab chuyển đổi -->
+            <div class="tab-header">
+                <button id="loginTabBtn" class="tab-btn active" onclick="switchTab('login')">Đăng Nhập</button>
+                <button id="registerTabBtn" class="tab-btn" onclick="switchTab('register')">Đăng Ký</button>
+            </div>
+
+            <!-- Form Đăng Nhập -->
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email / Tên đăng nhập</label>
+                    <input type="text" id="loginEmail" required placeholder="Nhập email...">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mật khẩu</label>
+                    <input type="password" id="loginPassword" required placeholder="Nhập mật khẩu...">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
+            </form>
+
+            <!-- Form Đăng Ký -->
+            <form id="registerForm" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label for="regName">Họ và Tên</label>
+                    <input type="text" id="regName" required placeholder="VD: Nguyễn Văn A">
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email đăng nhập</label>
+                    <input type="email" id="regEmail" required placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Mật khẩu</label>
+                    <input type="password" id="regPassword" required placeholder="Tối thiểu 6 ký tự">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Đăng Ký Tài Khoản</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
